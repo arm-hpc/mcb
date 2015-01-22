@@ -4,7 +4,7 @@ VERSION = 1.0
 BOOST_PREFIX    = $MCBDIR/boost_headers/boost
 CXX             = mpicc
 OPENMPFLAG      = -fopenmp
-MPI_INCLUDE     = 
+MPI_INCLUDE     = -I/usr/include/openmpi
 CXXDEFINES      = -DORTHOXY -DUSE_OPENMP -DUSE_MPI -DNOASSERT # -DUSE_TAU_EVENT_COUNTERS
 CXXFLAGS        = -O3 -march=armv8-a+fp+simd $(CXXDEFINES) $(OPENMPFLAG)
 LDFLAGS         =
