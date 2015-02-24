@@ -47,7 +47,7 @@ setUpDomainDecomposition( Source_DB_type& Source_DB,
     ASSERT( Domain_source_ptr == 0 );
 
 //    create BCs and add them to IMC BCs
-    setUpDomainDecompositionBCs( IMC_BCs );
+    this->setUpDomainDecompositionBCs( IMC_BCs );
     
 //    Make Domain_source
     typedef Domain_photon_source<mesh_types, mat_types> D_Source_type;

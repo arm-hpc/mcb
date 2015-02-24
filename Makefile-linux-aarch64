@@ -1,8 +1,8 @@
 VERSION = 1.0
 
 #-------------- User Defined Makefile Variables ---------------#
-BOOST_PREFIX    = $MCBDIR/boost_headers/boost
-CXX             = mpicc
+BOOST_PREFIX    = /usr
+CXX             = mpic++
 OPENMPFLAG      = -fopenmp
 MPI_INCLUDE     = -I/usr/include/openmpi
 CXXDEFINES      = -DORTHOXY -DUSE_OPENMP -DUSE_MPI -DNOASSERT # -DUSE_TAU_EVENT_COUNTERS
@@ -12,7 +12,7 @@ LIBPATH         =
 LIBS            =
 #--------------------------------------------------------------#
 
-BOOST_INCLUDE = -I${BOOST_PREFIX}/include
+BOOST_INCLUDE = -I${BOOST_PREFIX}/include/boost
 BOOST_LIB = -L${BOOST_PREFIX}/lib -Wl,-rpath ${BOOST_PREFIX}/lib
 
 include distfiles.txt
