@@ -52,6 +52,7 @@
 #include <omp.h>
 #endif
 
+#include "marker_stub.h"
 
 using namespace std;
 using namespace IMC_namespace;
@@ -91,6 +92,7 @@ int main(int argc, char* argv[])
   int mpiTaskID = 0;
   int nMpiTasks = 1;
 
+  MARKER_INIT;
 
 #ifdef USE_MPI
 
@@ -517,8 +519,17 @@ int main(int argc, char* argv[])
   double t = 0.0;
   double startTime=0.0, stopTime=0.0, advanceTime=0.0;
 
+  MARKER_START(mpiTaskID);
+#ifdef GEM5_MARKERS
+#ifdef USE_MPI
+  MPI_Barrier( MPI_COMM_WORLD );
+#endif // USE_MPI
+#endif // GEM5_MARKERS
+
   do
   {
+    MARKER_BEGIN(iteration+1, mpiTaskID);
+
     AnalyticODB.setUp( dt );
     MaterialDB.setUp( );
 
@@ -559,7 +570,16 @@ int main(int argc, char* argv[])
 
     }
 
+    MARKER_END(iteration, mpiTaskID);
+
   } while( t < (tEnd-dt/2.0) && iteration < maxTimesteps );
+
+#ifdef GEM5_MARKERS
+#ifdef USE_MPI
+  MPI_Barrier( MPI_COMM_WORLD );
+#endif // USE_MPI
+#endif // GEM5_MARKERS
+  MARKER_STOP(mpiTaskID);
 
 //     MonteCarlo.spatialOutput();
     
